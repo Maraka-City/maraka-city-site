@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Maraka City | Season 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --accent: #3b0ddf;
+            --accent-dark: #3b0ddf;
+            --gray: #888888;
+            --light-gray: #aaaaaa;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-image: url('https://media.discordapp.net/attachments/1392639420389392384/1402789565692903587/MARAKA_ROLEPLAY_FUNDO.png?ex=68953117&is=6893df97&hm=d42b84d6b3487913151ff563ceb71ce42d8655abcfe1dd35983d3c62aafdaf92&=&format=webp&quality=lossless');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .connect-btn {
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(56, 176, 0, 0.3);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 1rem;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3);
+            z-index: -1;
+        }
+        
+        .hero h2 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: var(--light-gray);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid var(--accent);
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(56, 176, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .server-stats {
+            display: flex;
+            gap: 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem 3rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 16px green;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .features {
+            padding: 6rem 2rem;
+            background-color: rgba(5, 5, 5, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 7px 20px rgba(29, 10, 204, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--light-gray);
+        }
+        
+        .gallery {
+            padding: 6rem 2rem;
+            background-color: rgba(10, 10, 10, 0.7);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 0px 20px rgba(0, 255, 0, 0.159);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.3);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 255, 0, 0.159), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .ranks {
+            padding: 6rem 2rem;
+            background-color: rgba(5, 5, 5, 0.8);
+        }
+        
+        .ranks-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .rank-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid var(--border); 
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .rank-row:hover {
+            transform: scale(1.02);
+            box-shadow: 0 7px 20px rgba(38, 255, 0, 0.3);
+        }
+        
+        .rank-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .rank-info img {
+            border-radius: 20px;
+        }
+        
+        .rank-icon {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .rank-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rank-details p {
+            color: var(--light-gray);
+        }
+        
+        .rank-requirements {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .rank-requirements h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .rank-requirements ul {
+            list-style: none;
+            color: var(--light-gray);
+        }
+        
+        .rank-requirements li::before {
+            content: '✓';
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .rules {
+            padding: 6rem 2rem;
+            background-color: rgba(10, 10, 10, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .rules-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .rule-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rule-card h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .rule-card ul {
+            list-style: none;
+        }
+        
+        .rule-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .rule-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .join {
+            padding: 6rem 2rem;
+            text-align: center;
+            background-color: rgba(5, 5, 5, 0.8);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .join::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.1);
+            z-index: 0;
+        }
+        
+        .join-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .join h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .join p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--light-gray);
+        }
+        
+        .join-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .discord-btn {
+            background-color: #5865F2;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .discord-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+        
+        footer {
+            background-color: rgba(5, 5, 5, 0.9);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .server-stats {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .rank-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                justify-content: center;
+            }
+        }
+
+        .military-decoration {
+            position: absolute;
+            top: 50%;
+            left: -50px;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(56, 176, 0, 0.1);
+            z-index: -1;
+        }
+        
+        .military-decoration::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px dashed var(--accent);
+        }
+        
+        .digital-effect {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: 
+                linear-gradient(0deg, rgba(56, 176, 0, 0.05) 25%, transparent 25%) 0 0,
+                linear-gradient(0deg, rgba(56, 176, 0, 0.05) 25%, transparent 25%) 10px 10px,
+                linear-gradient(0deg, transparent 75%, rgba(56, 176, 0, 0.05) 75%) 0 0,
+                linear-gradient(0deg, transparent 75%, rgba(56, 176, 0, 0.05) 75%) 10px 10px;
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#hero">
+                <img src="https://media.discordapp.net/attachments/1392639420389392384/1402791570561962047/MARAKA_ROLEPLAY_SF.png?ex=689532f5&is=6893e175&hm=19272dd36356b094193d9495462205796fb9da516eb8051e608ad586fba14575&=&format=webp&quality=lossless" alt="Logo Maraka City">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#features">Informações</a></li>
+                <li><a href="#rules">Regras</a></li>
+                <li><a href="#join">Junte-se a nós</a></li>
+                <li><a href="https://sua-loja-aqui.com" target="_blank">Loja</a></li>
+            </ul>
+        </nav>
+        <a href="Colocar" target="_blank"><button class="connect-btn">Conectar Agora</button></a>
+    </header>
+    
+    <section class="hero" id="hero">
+        <h2>Maraka <a style="color: #3b0ddf;">City</a></h2>
+        <p>Maraka Roleplay é a melhor city SP RP imersiva, onde a realidade e a emoção das ruas de São Paulo ganham vida!</p>
+        <div class="hero-buttons">
+            <a href="https://discord.gg/r4t78ucqCG" target="_blank"><button class="connect-btn">Junte-se ao servidor</button></a>
+            <a href="https://docs.google.com/document/d/1ts8de_ajtYon9IpxyZoKku7fgFewum25RiE9nr53UX4/edit?usp=sharing" target="_blank"><button class="secondary-btn">Saiba Mais</button></a>
+        </div>
+        <div class="server-stats">
+            <div class="stat">
+                <div class="stat-value">64</div>
+                <div class="stat-label">Slots para jogadores</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">08/08</div>
+                <div class="stat-label">Inauguração</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">20:00</div>
+                <div class="stat-label">Horario</div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Informações do Servidor</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-ghost"></i>
+                </div>
+                <h3>Tema Do Servidor</h3>
+                <p>Melhor Servidor Tema Sp No Momento.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-ghost"></i>
+                </div>
+                <h3>Cidade</h3>
+                <p>Cidade Tema Sp Com Diversas Viaturas, Batlhões, Scripts Exclusivos E Muito Mais Para Saber Mais Entre Na Cidade.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-ghost"></i>
+                </div>
+                <h3>Nossa Loja</h3>
+                <p></p>
+                <a href="https://sua-loja-aqui.com" target="_blank">
+                    <button class="connect-btn" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.5rem 1rem;">Acessar Loja</button>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="rules" id="rules">
+        <div class="section-title">
+            <h2>Livro de Regras</h2>
+        </div>
+        <div class="rules-container">
+                        <div class="rule-card">
+                <h3><span>01</span> Regras Gerais</h3>
+                <ul>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="https://docs.google.com/document/d/19eX6Radgxt-2O6dcIUNql-5VGjoCOwLdIT_4TVmFflE/edit?usp=sharing" target="_blank">
+                            <button class="connect-btn">Ver Livro de Regras Completo</button>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section class="join" id="join">
+        <div class="join-content">
+            <h2>Junte-se à Maraka City</h2>
+            <p>Pronto para fazer seu roleplay na melhor cidade tema sp?</p>
+            <div class="join-buttons">
+                <a href="https://discord.gg/r4t78ucqCG" target="_blank"><button class="connect-btn">Junte-se ao servidor</button></a>
+                <a href="https://docs.google.com/document/d/1ts8de_ajtYon9IpxyZoKku7fgFewum25RiE9nr53UX4/edit?usp=sharing" target="_blank"><button class="secondary-btn">Saiba Mais</button></a>
+            </div>
+        </div>
+        <div class="military-decoration"></div>
+        <div class="digital-effect"></div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://cdn.discordapp.com/attachments/1392639420389392384/1402791570561962047/MARAKA_ROLEPLAY_SF.png?ex=689532f5&is=6893e175&hm=19272dd36356b094193d9495462205796fb9da516eb8051e608ad586fba14575&" alt="Logo Maraka City">
+            </div>
+            <div class="footer-links">
+                <a href="https://discord.gg/zgwsnv9Eur"target="_blank"</a>Suporte</a>
+                <a href="Site"target="_blank"</a>Doação</a>
+                <a href="https://discord.gg/r4t78ucqCG"target="_blank"</a>Contato</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 Maraka City,A Melhor Do Momento!!.</p>
+        </div>
+    </footer>
+</body>
